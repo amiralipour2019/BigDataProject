@@ -31,10 +31,9 @@
   library(neuralnet)
   library(resample)
   library(readxl)
-    library(pls)
+  library(pls)
   # if (!require("BiocManager", quietly = TRUE))
   #   install.packages("BiocManager")
-  # 
   # BiocManager::install("mixOmics")
   library(MASS)
   library(lattice)
@@ -42,10 +41,9 @@
 #########################################################
 # Reading and preparation of the dataset
 #########################################################
-setwd("D:\\Classes\\Spring2023\\STA6704\\HWs\\Final Project")
-getwd()
+
 # import the old dataset
-final_data<-read_excel("D:\\MyResearch\\Tire\\DATA_MATRIX_2_no_laser_line.xlsx")
+final_data<-read_excel("DATA_MATRIX_2_no_laser_line.xlsx")
 dim(final_data)
 head(final_data)
 
@@ -68,9 +66,7 @@ for(i in 2:n){
   Tires[,i] <- lapply(Tires[,i], as.numeric)
 }
 
-
-write.csv(Tires,"D:\\MyResearch\\Tire\\Tiers_OldSet.csv")
-Tiers2<-read.csv("D:\\MyResearch\\Tire\\Tiers_OldSet.csv")
+Tiers2<-read.csv("Tiers_OldSet.csv")
 dim(Tiers2)
 Tiers<-Tiers2[,-1]
 # #Omit NA from Numeric Conversion
@@ -121,32 +117,13 @@ plotIndiv(fit_plsda, comp = c(1, 2),X.label = "Comp1: 57% Exp.Var",
 scores_mat_plsda<-fit_plsda$variates$X
 scores_mat_plsda
 dim(scores_mat_plsda)
-write.csv(scores_mat_plsda,"D:\\MyResearch\\Tire\\scores_mat_plsda.csv")
-scores_mat_plsda<-read.csv("D:\\MyResearch\\Tire\\pve_plsda.csv")
+
+scores_mat_plsda<-read.csv("pve_plsda.csv")
 scores_mat_plsda
-#head(scores_mat_plsda)
-
-# #Corr matrix for components
-# corr<-round(cor(score.plsda.rs),2)
-# ggcorrplot::ggcorrplot(corr)
-# 
-# 
-# # plsplsda#get the pls's score values
-# score.plsda.rs <-as.data.frame(score.plsda.rs)
-# # dim(scoresc.plsda.rs)
-# head(score.plsda.rs)
-# 
-# score.plsda.rs
-
 
 #Get the proportional variance explained by each components from X matrix
 pve_plsda<-fit_plsda$prop_expl_var$X
 pve_plsda
-
-
-
-# pve.plsda.rs<-unname(pve.plsda.rs)
-# pve.plsda.rs
 
 #variance explained
 varExp_plsda= (100*pve_plsda)
@@ -184,7 +161,7 @@ varExp_cum_plsda
 varDF_cum_plsda = data.frame(Dimensions=1:length(varExp_cum_plsda),
                                 varExp_cum_plsda=varExp_cum_plsda)
 varDF_cum_plsda
-write.csv(varDF_cum_plsda,"D:\\Classes\\Spring2023\\STA6704\\HWs\\Final Project\\varDF_cum_plsda.csv")
+
 
 varDF_cum_plsda=read.csv("varDF_cum_plsda.csv")
 optimal_pc=89
@@ -213,8 +190,6 @@ ggplot(scree_data, aes(x = component, y = pve_plsda)) +
   geom_vline(xintercept = optimal_pc, linetype = "dashed", color = "red")
 
 ###heat map
-
-
 Tires_PLSDA_Selected<-scores_mat_plsda[,1:89]
 
 dim(Tires_PLSDA_Selected)
@@ -317,12 +292,12 @@ results_df <- data.frame(
 )
 
 # Save to CSV
-write.csv(results_df, "D:\\Classes\\Fall2023\\STA6366\\HWs\\Final Project\\Code\\Training_results3.csv", row.names = FALSE)
+write.csv(results_df, "Training_results3.csv", row.names = FALSE)
 # Save the model
-saveRDS(results, "D:\\Classes\\Fall2023\\STA6366\\HWs\\Final Project\\Code\\Training_results3.rds")
+saveRDS(results, "Training_results3.rds")
 
 # Load the saved model
-fit_loaded <- readRDS("D:\\Classes\\Fall2023\\STA6366\\HWs\\Final Project\\Code\\Training_results3.rds")
+fit_loaded <- readRDS("Training_results3.rds")
 fit_loaded
 # Evaluate models on test data
 TestResults <- list()
@@ -340,7 +315,7 @@ for (model in models) {
 }
 #Save test results
 
-saveRDS(TestResults,"D:\\Classes\\Fall2023\\STA6366\\HWs\\Final Project\\Code\\TestResults3.rds")
+saveRDS(TestResults,"TestResults3.rds")
 TestResults_loaded=readRDS("TestResults3.rds")
 TestResults_loaded
 
