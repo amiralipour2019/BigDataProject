@@ -1,4 +1,4 @@
-# Spectroscopy Data Analysis for Tire Forensics
+# High Dimentional Spectroscopy Data Analysis for Tire Forensics
 
 This R script is designed for the analysis of spectroscopy data in the context of forensic science, specifically focusing on tire analysis. The implementation leverages a suite of statistical and machine learning libraries to process, visualize, and analyze spectroscopic data obtained from tire samples. The objective is to identify distinctive patterns and characteristics that can be used to match tire marks found at crime scenes to specific tire brands or models.
 
