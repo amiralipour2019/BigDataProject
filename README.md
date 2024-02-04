@@ -10,4 +10,5 @@ Key functionalities include:
 * Exploratory data analysis to investigate underlying patterns and trends within the tire samples.
 * Application of statistical tests to assess the significance of observed differences among tire samples.
 * Development of predictive models to accurately classify tire marks, enhancing forensic investigations.
+  
 This script is a vital tool for forensic analysts aiming to utilize spectroscopy data in tire examinations, providing a data-driven approach to support criminal investigations and legal proceedings.
